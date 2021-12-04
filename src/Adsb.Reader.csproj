@@ -21,6 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\adsb-model\jpda.Adsb.Model.csproj" />
+      <ProjectReference Include="..\adsb-model\src\jpda.Adsb.Model.csproj" />
     </ItemGroup>
 </Project>
