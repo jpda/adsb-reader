@@ -1,0 +1,3 @@
+[submodule "adsb-model"]
+	path = adsb-model
+	url = https://github.com/jpda/adsb-model
