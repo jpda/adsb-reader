@@ -2,10 +2,6 @@ using System.Net.Sockets;
 using jpda.Adsb.Model;
 using Adsb.Reader;
 using Adsb.Reader.Observers;
-using Grpc.Core;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Dapr.Client;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -16,11 +12,12 @@ IHost host = Host.CreateDefaultBuilder(args)
             context.Configuration.Bind("AdsbConnector", opts);
         });
 
-        services.AddSingleton<TcpClient>(x => new TcpClient());
+        services.AddSingleton(x => new TcpClient());
 
         //services.AddSingleton<IAsyncObserver<Message>, ConsoleObserver>();
-        services.AddSingleton<DaprClient>(x => new DaprClientBuilder().Build());
-        services.AddSingleton<IAsyncObserver<Message>, DaprPubObserver>();
+        services.AddSingleton(x => new DaprClientBuilder().Build());
+        services.AddSingleton<Dapr.Actors.Client.ActorProxyFactory>();
+        services.AddSingleton<IAsyncObserver<Message>, DaprActorObserver>();
         services.AddHostedService<AdsbConnector>();
     })
     .Build();

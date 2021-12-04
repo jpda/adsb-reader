@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Dapr.Client;
 using adsb = jpda.Adsb.Model;
 
-
 namespace Adsb.Reader.Observers
 {
     public class DaprPubObserver : IAsyncObserver<adsb.Message>
